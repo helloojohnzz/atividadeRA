@@ -1,111 +1,136 @@
+/* Cor principal calculada pelo RA 01989: 989 mod 360 = 269 -> hsl(269, 60%, 35%) */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --cor-principal: hsl(269, 60%, 35%);
+  --cor-principal-clara: hsl(269, 60%, 94%);
+  --fundo: hsl(269, 25%, 97%);
+  --texto: hsl(269, 20%, 14%);
+  --erro: #b3261e;
+  --sucesso: #1b6e3c;
+  --largura-menu: 230px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.5;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+h1, h2, .navbar-marca, .destaque-numero { font-family: "Sora", "Segoe UI", sans-serif; }
+h1 { margin-top: 0; color: var(--cor-principal); }
+h2 { color: var(--cor-principal); margin-bottom: 0.5rem; }
+a { color: var(--cor-principal); }
+
+/* Estrutura: menu fixo à esquerda + conteúdo */
+.layout { min-height: 100vh; }
+.conteudo {
+  margin-left: var(--largura-menu);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
 }
+.pagina { flex: 1; padding: 2rem 2.5rem; max-width: 820px; width: 100%; }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* Navbar vertical (D = 1) */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--largura-menu);
+  background: var(--cor-principal);
+  color: #fff;
+  padding: 1.5rem 1rem;
 }
+.navbar-marca { font-size: 1.15rem; font-weight: 700; margin-bottom: 2rem; line-height: 1.3; }
+.navbar ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.25rem; }
+.link {
+  display: block;
+  padding: 0.65rem 0.85rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  border-left: 4px solid transparent;
+}
+.link:hover { background: rgba(255, 255, 255, 0.12); }
+.link:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+/* Estilo do link ativo (R2) */
+.link.ativo { background: #fff; color: var(--cor-principal); font-weight: 700; border-left-color: var(--texto); }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
+/* Home */
+.subtitulo { margin-top: -0.5rem; opacity: 0.75; }
+.destaque { display: flex; align-items: baseline; gap: 0.75rem; margin: 1.5rem 0; }
+.destaque-numero { font-size: 4rem; font-weight: 700; color: var(--cor-principal); line-height: 1; }
+.destaque-texto { font-size: 1.2rem; }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
+/* Botões */
+.botao {
+  display: inline-block;
+  background: var(--cor-principal);
+  color: #fff;
+  border: 2px solid var(--cor-principal);
+  padding: 0.6rem 1.1rem;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.botao:hover { filter: brightness(1.15); }
+.botao:focus-visible { outline: 3px solid var(--texto); outline-offset: 2px; }
+.botao.secundario { background: transparent; color: var(--cor-principal); }
+
+/* Formulário */
+.formulario { display: grid; gap: 1.1rem; max-width: 420px; }
+.campo { display: grid; gap: 0.3rem; }
+.campo label { font-weight: 600; }
+.campo input, .campo select {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid hsl(269, 15%, 60%);
+  border-radius: 6px;
+  font: inherit;
+  background: #fff;
+}
+.campo input:focus, .campo select:focus { outline: 2px solid var(--cor-principal); border-color: var(--cor-principal); }
+.erro { color: var(--erro); }
+
+/* Visualização */
+.sucesso {
+  background: #e4f4ea;
+  color: var(--sucesso);
+  border-left: 4px solid var(--sucesso);
+  padding: 0.7rem 1rem;
   border-radius: 4px;
-  color: var(--text-h);
+}
+.grupo { margin-top: 1.5rem; }
+.contagem { font-weight: 400; font-size: 0.9rem; opacity: 0.7; }
+.vazio { opacity: 0.6; margin: 0; }
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.lista li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.1rem 1rem;
+  background: #fff;
+  border-left: 4px solid var(--cor-principal);
+  padding: 0.7rem 1rem;
+  border-radius: 4px;
+}
+.lista li span:nth-of-type(2) { grid-column: 1 / -1; font-size: 0.9rem; opacity: 0.75; }
+
+/* Rodapé (todas as páginas) */
+.rodape {
+  padding: 1rem 2.5rem;
+  background: var(--cor-principal-clara);
+  color: var(--cor-principal);
+  font-weight: 600;
+  border-top: 1px solid hsl(269, 30%, 80%);
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+/* Telas pequenas: o menu passa para o topo */
+@media (max-width: 640px) {
+  .navbar { position: static; width: 100%; }
+  .navbar ul { grid-auto-flow: column; }
+  .conteudo { margin-left: 0; min-height: auto; }
+  .pagina { padding: 1.25rem; }
 }
