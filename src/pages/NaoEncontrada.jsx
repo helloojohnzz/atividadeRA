@@ -1,6 +1,3 @@
-// NaoEncontrada.jsx — rota coringa "*".
-// useLocation devolve o objeto da URL atual; pathname é o caminho digitado
-// pela pessoa (ex.: /qualquer-coisa).
 import { Link, useLocation } from "react-router-dom";
 
 function NaoEncontrada() {
